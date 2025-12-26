@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Kukkiwon Training</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/lib/wanted-sans.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="list-page">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="page-nav" onclick="location.reload()">
+                    <img src="logo_metataekwon.png" class="nav-logo-img" alt="Logo">
+                </div>
+            </div>
+            <div class="grid-container" id="poomsaeGrid"></div>
+        </div>
+    </div>
+
+    <div id="video-page">
+        <button class="back-btn-floating" onclick="goBackToList()">
+            <span class="back-icon">←</span>
+            <span class="back-text">돌아가기</span>
+        </button>
+
+        <div class="video-layout">
+            <div class="video-main-container">
+                <div class="video-content">
+                    <video class="video-player" id="mainVideoPlayer" playsinline></video>
+                </div>
+                
+                <div class="video-custom-controls">
+                    <div class="custom-progress-container" id="progressContainer" onclick="seekVideo(event)">
+                        <div class="progress-bg"></div>
+                        <div class="progress-fill" id="progressFill"></div>
+                        <div class="progress-handle" id="progressHandle"></div>
+                        <div class="loop-highlight" id="loopHighlight"></div>
+                        <div class="marker marker-a" id="visualMarkerA">A</div>
+                        <div class="marker marker-b" id="visualMarkerB">B</div>
+                    </div>
+
+                    <div class="controls-row">
+    
+    <div class="controls-left">
+        <button class="v-control-btn icon-btn" id="playPauseBtn" onclick="togglePlay()">▶</button>
+        <button class="v-control-btn icon-btn" onclick="playNextVideo()">⏭</button>
+        
+        <div class="volume-container">
+            <button class="v-control-btn icon-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
+            <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="1" oninput="setVolume(this.value)">
+        </div>
+
+        <div class="time-text" id="timeDisplay">0:00 / 0:00</div>
+
+        <button class="v-control-btn icon-btn" id="fullscreenBtn" onclick="toggleFullscreen()">
+            ⛶
+        </button>
+    </div>
+
+    <div class="controls-right">
+        
+        <div class="control-unit">
+            <span class="v-control-label">배속</span>
+            <div class="speed-dropdown-container">
+                <button class="v-control-btn speed-toggle-btn" onclick="toggleSpeedMenu()">
+                    <span id="currentSpeedText">1.0x</span>
+                </button>
+                <div class="speed-menu" id="speedMenu">
+                    <div class="speed-item" onclick="changeSpeed(0.5)">0.5x</div>
+                    <div class="speed-item active" onclick="changeSpeed(1.0)">1.0x</div>
+                    <div class="speed-item" onclick="changeSpeed(1.5)">1.5x</div>
+                    <div class="speed-item" onclick="changeSpeed(2.0)">2.0x</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="control-unit">
+            <span class="v-control-label">반복</span>
+            <div class="repeat-buttons">
+                <button class="v-control-btn" id="btn-A" onclick="markA()">시작</button>
+                <button class="v-control-btn" id="btn-B" onclick="markB()">끝</button>
+                <button class="v-control-btn" onclick="clearRepeat()" style="color: #FF453A;">리셋</button>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+                </div> 
+            </div>
+
+            <div class="sidebar">
+                
+                <div class="sidebar-header">
+                    <div class="sidebar-main-title" id="sideTitle">Poomsae Name</div>
+                    <button class="mode-toggle-btn" id="viewModeBtn" onclick="toggleViewMode()">
+                        <span class="toggle-icon">⇄</span> <span id="viewModeText">후면 전환</span>
+                    </button>
+                </div>
+
+                <div class="tab-group">
+                    <button class="tab-btn active" onclick="switchTab('single')">개별</button>
+                    <button class="tab-btn" onclick="switchTab('multi')">연속</button>
+                </div>
+                
+                <div id="tab-single" class="control-group active"></div>
+                <div id="tab-multi" class="control-group"></div>
+            </div>
+        </div>
+    </div> 
+    <script src="videoData.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>
